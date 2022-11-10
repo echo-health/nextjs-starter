@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) template bootstrapped with [`create-nex
 ## Things not included that you might want to add
 
 - `npm i @echo-health/react-auth` to add [react-auth](https://github.com/echo-health/design-system/tree/main/packages/patterns/react-auth) to internal tools
-- `npm i @echo-health/react-grpc` to add [react-grpc](https://github.com/echo-health/design-system/tree/main/packages/patterns/react-auth) utilities for handling gRPC requests directly to our services
+- `npm i @echo-health/react-grpc` to add [react-grpc](https://github.com/echo-health/design-system/tree/main/packages/patterns/react-grpc) utilities for handling gRPC requests directly to our services
 
 ## Want to create your own LloydsDirect NextJS app?
 
