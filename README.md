@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) template bootstrapped with [`create-nex
 You can create your own with this one-liner:
 
 ```cli
-npx create-next-app my-app-name3 --example https://github.com/echo-health/nextjs-starter
+npx create-next-app my-app-name --example https://github.com/echo-health/nextjs-starter
 ```
 
 ## What's included
