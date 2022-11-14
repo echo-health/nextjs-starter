@@ -12,9 +12,14 @@ npx create-next-app my-app-name --example https://github.com/echo-health/nextjs-
 - Our various [Design System](http://github.com/echo-health/design-system) packages
 - Sentry error reporting
 
-## Things not included
+## Things you may want to add
 
-### State management
+- [State Management](#state-management)
+- [Data Fetching: gRPC](#data-fetching-grpc)
+- [Data Fetching: GraphQL](#data-fetching-graphql)
+- [Staff Authentication](#staff-authentication)
+
+### State Management
 
 Our tooling attempts to be agnostic of your choices when it comes to state management, however, before rolling with your favourite library, consider if you even really need a state management library, or if you can get away with using vanilla [React Contexts and Reducers](https://beta.reactjs.org/learn/scaling-up-with-reducer-and-context).
 
@@ -24,13 +29,24 @@ Try to avoid overcomplicating things with highly opinionated paradigms specific 
 - https://jotai.org/
 - https://github.com/pmndrs/zustand
 
-### Internal app
+### Data Fetching: gRPC
 
-You can install a few optional packages to help you get started if you are rolling a new internal app:
+The [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/react-web-react) package containts utilities for fetching and typing data from our backend gRPC services. 
 
-- `npm i @echo-health/react-auth@latest` to add [react-auth](https://github.com/echo-health/design-system/tree/main/packages/patterns/react-auth) to internal tools
-- `npm i @echo-health/grpc-web-react@latest` to add [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/react-web-react) utilities for gRPC data fetching
+```cli
+npm i @echo-health/grpc-web-react@latest
+```
 
+### Data Fetching: GraphQL
 
+For our patient-facing apps, we use [Apollo Client](https://www.apollographql.com/docs/react/) to fetch data from our GraphQL API. 
+
+### Staff Authentication
+
+The [react-auth](https://github.com/echo-health/design-system/tree/main/packages/patterns/react-auth) package allows you to quickly add staff authentication and authorisation to internal tools.
+
+```cli
+npm i @echo-health/react-aut@latest
+```
 
 
