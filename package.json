@@ -13,6 +13,7 @@
     "@echo-health/design-system": "latest",
     "@echo-health/icons-web": "latest",
     "@echo-health/illustrations-web": "latest",
+    "@sentry/nextjs": "latest",
     "next": "^13",
     "react": "^18.2",
     "react-dom": "^18.2",
