@@ -10,15 +10,15 @@
 
 This is a [Next.js](https://nextjs.org/) template bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) - you can create your own with this one-liner:
 
-```cli
+```sh
 npx create-next-app my-app-name --example https://github.com/echo-health/nextjs-starter
 ```
 
 ## What's included
 
 - A configured setup of our recommended Framework, [Next.js](https://nextjs.org/)
-- Our various [Design System](http://github.com/echo-health/design-system) packages
-- Sentry error reporting
+- Our core [design system](http://github.com/echo-health/design-system) packages
+- Sentry error reporting, [see configuration](#sentry) options
 
 ## Things you may want to add
 
@@ -39,9 +39,9 @@ There are few React-ish, lightweight state management libraries kicking around w
 
 ### Data Fetching: gRPC
 
-The [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/grpc-web-react) package containts utilities for interacting with – and typing the models from – our backend gRPC services.
+The [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/grpc-web-react) package contains utilities for interacting with (and typing  model definitions from) our backend gRPC services.
 
-```cli
+```sh
 npm i @echo-health/grpc-web-react@latest
 ```
 
@@ -53,11 +53,12 @@ For our patient-facing apps, we use [Apollo Client](https://www.apollographql.co
 
 The [react-auth](https://github.com/echo-health/design-system/tree/main/packages/patterns/react-auth) package allows you to quickly add staff authentication and authorisation to internal tools.
 
-```cli
+```sh
 npm i @echo-health/react-aut@latest
 ```
-
 ## First deploy configuration
+
+Once the usual kubernetes configuration has been put in place, you'll need to configure the following variables.
 
 ### CI
 
