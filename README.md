@@ -1,12 +1,4 @@
-# NextJS Starter 
-
-- [Getting Started](#getting-started)
-- [What's Included](#whats-included)
-- [What's not Included](#whats-not-included)
-    - [State Management](#state-management)
-    - [Data Fetching: gRPC](#data-fetching-grpc)
-    - [Data Fetching: GraphQL](#data-fetching-graphql)
-    - [Staff Authentication](#staff-authentication)
+# Next.js Starter Template
 
 This is a [Next.js](https://nextjs.org/) template bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) - you can create your own with this one-liner:
 
@@ -14,11 +6,19 @@ This is a [Next.js](https://nextjs.org/) template bootstrapped with [`create-nex
 npx create-next-app my-app-name --example https://github.com/echo-health/nextjs-starter
 ```
 
+- [Getting Started](#getting-started)
+- [What's Included](#whats-included)
+- [What's Not Included](#whats-not-included)
+    - [State Management](#state-management)
+    - [Data Fetching: gRPC](#data-fetching-grpc)
+    - [Data Fetching: GraphQL](#data-fetching-graphql)
+    - [Staff Authentication](#staff-authentication)
+
 ## Getting Started
 
 Once the usual kubernetes configuration has been put in place, you'll need to configure a few aspects of your production environments. 
 
-> First things first, you'll want to rename your app in `package.json` to something a little snazzier than `nextjs-starter`.
+> First things first, you'll want to rename your app in `package.json` to something a little snazzier.
 
 ### Configure CI
 
@@ -38,13 +38,23 @@ You'll need to create a new Sentry project for your app, once you've done that, 
 npx @sentry/wizard -i nextjs
 ```
 
+### Deployment and Semantic Versioning
+
+We use `anothrNick/github-tag-action` to bump our app version in `package.json` on every merge to `main`. This version tag is used in a few of places:
+
+- You can display it to the user with `process.env.NEXT_PUBLIC_APP_VERSION`
+- We will use it in our Sentry release tagging
+- Git tags will be created for each release
+
+> By default, the version will be bumped as a patch release. You can override this by adding a `#major`, `#minor` or `#patch` to your merge commit message.
+
 ## What's Included
 
 - A configured setup of our recommended Framework, [Next.js](https://nextjs.org/)
 - Our core [design system](http://github.com/echo-health/design-system) packages
 - Sentry error reporting, [see configuration](#sentry) options
 
-## What's not Included
+## What's Not Included
 
 - [State Management](#state-management)
 - [Data Fetching: gRPC](#data-fetching-grpc)
