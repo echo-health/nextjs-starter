@@ -64,7 +64,7 @@ npm i @echo-health/react-aut@latest
 Github secrets are used to configure the deployment of the app. The following secrets are required, some of which you may get for free from org-wide secrets:
 
 | Secret | Scope | Description |
-| --- | --- |
+| --- | --- | -- |
 | `APP_NAME` | Repo | Application name used for both Sentry and our Docker builds |
 | `GITHUB_TOKEN` | Org | A Github token with access to the repository |
 | `SENTRY_AUTH_TOKEN` | Org | A Sentry auth token with access to your repo |
