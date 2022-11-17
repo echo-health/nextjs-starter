@@ -31,7 +31,7 @@ npx create-next-app my-app-name --example https://github.com/echo-health/nextjs-
 
 Our tooling attempts to be agnostic of your choices when it comes to state management, however, before rolling with your favourite library, consider if you even really need a state management library, or if you can get away with using vanilla [React Contexts and Reducers](https://beta.reactjs.org/learn/scaling-up-with-reducer-and-context).
 
-Try to avoid overcomplicating things with highly opinionated paradigms specific to particular libraries. There are few React-ish, lightweight state management libraries kicking around which won't impose too much on your app architecture:
+There are few React-ish, lightweight state management libraries kicking around which won't impose too much on your app architecture:
 
 - https://recoiljs.org/
 - https://jotai.org/
@@ -39,7 +39,7 @@ Try to avoid overcomplicating things with highly opinionated paradigms specific 
 
 ### Data Fetching: gRPC
 
-The [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/react-web-react) package contains utilities for fetching and typing data from our backend gRPC services. 
+The [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/grpc-web-react) package containts utilities for interacting with – and typing the models from – our backend gRPC services.
 
 ```cli
 npm i @echo-health/grpc-web-react@latest
