@@ -1,5 +1,13 @@
 # NextJS Starter 
 
+- [What's included](#whats-included)
+- [Things you may want to add](#things-you-may-want-to-add)
+    - [State Management](#state-management)
+    - [Data Fetching: gRPC](#data-fetching-grpc)
+    - [Data Fetching: GraphQL](#data-fetching-graphql)
+    - [Staff Authentication](#staff-authentication)
+- [First deploy configuration](#first-deploy-configuration)
+
 This is a [Next.js](https://nextjs.org/) template bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) - you can create your own with this one-liner:
 
 ```cli
@@ -31,7 +39,7 @@ Try to avoid overcomplicating things with highly opinionated paradigms specific 
 
 ### Data Fetching: gRPC
 
-The [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/react-web-react) package containts utilities for fetching and typing data from our backend gRPC services. 
+The [grpc-web-react](https://github.com/echo-health/design-system/tree/main/packages/utilities/react-web-react) package contains utilities for fetching and typing data from our backend gRPC services. 
 
 ```cli
 npm i @echo-health/grpc-web-react@latest
@@ -49,4 +57,20 @@ The [react-auth](https://github.com/echo-health/design-system/tree/main/packages
 npm i @echo-health/react-aut@latest
 ```
 
+## First deploy configuration
 
+### CI
+
+Github secrets are used to configure the deployment of the app. The following secrets are required, some of which you may get for free from org-wide secrets:
+
+| Secret | Scope | Description |
+| --- | --- |
+| `APP_NAME` | Repo | Application name used for both Sentry and our Docker builds |
+| `GITHUB_TOKEN` | Org | A Github token with access to the repository |
+| `SENTRY_AUTH_TOKEN` | Org | A Sentry auth token with access to your repo |
+
+### Sentry
+
+You'll need to create a new Sentry project for your app, then you can configure Sentry by adding `NEXT_PUBLIC_SENTRY_DSN` environment variable to your app. You can find this in the Sentry project settings.
+
+Optionally you can configure Sentry futher in `pages/_app.tsx`.

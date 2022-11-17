@@ -1,0 +1,89 @@
+name: CI Workflow
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependancies
+        env: 
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci
+      - name: Lint
+        run: npm run lint
+      - name: Test
+        run: npm run test
+
+  build:
+    needs: test
+    name: Build
+    if: github.head_ref == null # head_ref won't be null for Pull Request builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+      - uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - id: semver_tag
+        uses: anothrNick/github-tag-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+      - name: Set Git tag in package.json
+        env:
+          TAG: ${{ steps.semver_tag.outputs.new_tag }}
+        run: |
+          node -e "var p = require('./package.json'); p.git_tag = '$TAG'; fs.writeFileSync('package.json', JSON.stringify(p, null, '  '));"
+      - name: Install dependancies
+        env: 
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Authenticate Google Cloud
+        env:
+          GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+        run: |
+          echo "$GCLOUD_AUTH" | base64 --decode > "$HOME"/gcloud.json
+          gcloud auth activate-service-account --key-file=$HOME/gcloud.json
+          gcloud auth configure-docker
+      - name: Docker build & push
+        env:
+          TAG: ${{ steps.semver_tag.outputs.new_tag }}
+        run: |
+          docker build -t eu.gcr.io/echo-containers/${{ secrets.APP_NAME }}:${TAG} .
+          docker push eu.gcr.io/echo-containers/${{ secrets.APP_NAME }}:${TAG}
+      - name: Create Sentry release # https://github.com/getsentry/action-release
+        uses: getsentry/action-release@v1
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: echo-health
+          SENTRY_PROJECT: ${{ secrets.APP_NAME }}
+        with:
+          environment: "production"
+          version: ${{ steps.semver_tag.outputs.new_tag }}
+          sourcemaps: build/static/js
+          url_prefix: ~/static/js 
